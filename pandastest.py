@@ -44,14 +44,22 @@ def allTotalsByMonth(month):
     for i in df.columns[1:-1]:
         amount = df.loc[df['month']==month, i].sum()
         totals_dict[i]=amount
-    sorteddict = sorted(totals_dict, key = totals_dict.__getitem__)
-    final = []
-    for i in sorteddict:
-        a = i, totals_dict[i]
-        final.append(a)
-    final.reverse()
+    final = sortdictionary(totals_dict)
     return final
 
+def sortdictionary(dictionary):
+    """Receives a dictionary as input. Sorts the dictionary based on key values
+       in ascending order into a list. Then reverses that list so that values are
+       in descending order (highest values first).
+       Returns a list.
+    """
+    dictionary = sorted(dictionary, key=dictionary.__getitem__)
+    results = []
+    for i in dictionary:
+        value = i, dictionary[i]
+        results.append(value)
+    results.reverse()
+    return results
 print(allTotalsByMonth('november'))
 
 def totalForAllMonths(df):
